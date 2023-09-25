@@ -1,1 +1,266 @@
+가중치 환산코드
+######1
+#### 가중지 환산코드
+
+def get_normalized_input(prompt):
+    while True:
+        try:
+            user_input = int(input(prompt))
+            if 0 <= user_input <= 100 and user_input % 5 == 0:
+                return user_input
+            else:
+                print("입력값은 0에서 100 사이의 5의 배수여야 합니다.")
+        except ValueError:
+            print("올바른 숫자를 입력하세요.")
+
+# 사용자로부터 4가지 답변 입력 받기
+answer1 = get_normalized_input("첫 번째 답변을 입력하세요 (0에서 100 사이의 5의 배수): ")
+answer2 = get_normalized_input("두 번째 답변을 입력하세요 (0에서 100 사이의 5의 배수): ")
+answer3 = get_normalized_input("세 번째 답변을 입력하세요 (0에서 100 사이의 5의 배수): ")
+answer4 = get_normalized_input("네 번째 답변을 입력하세요 (0에서 100 사이의 5의 배수): ")
+
+# 총합 계산
+total = answer1 + answer2 + answer3 + answer4
+
+# 비율 계산 및 값 조정
+if total > 0:
+    ratio = 1 / total
+    answer1 = answer1 * ratio
+    answer2 = answer2 * ratio
+    answer3 = answer3 * ratio
+    answer4 = answer4 * ratio
+
+answer11 = float(round(answer1,2))
+answer12 = float(round(answer2,2))
+answer13 = float(round(answer3,2))
+answer14 = float(round(answer4,2))
+
+total2 = answer11 + answer12 + answer13+answer14
+
+if total2 >1:
+  answer11 -= 0.01/4
+  answer12 -= 0.01/4
+  answer13 -= 0.01/4
+  answer14 -= 0.01/4
+
+if total2 <1:
+  answer11 += 0.01/4
+  answer12 += 0.01/4
+  answer13 += 0.01/4
+  answer14 += 0.01/4
+
+# 결과 출력
+print(f"첫 번째 답변: {answer11}")
+print(f"두 번째 답변: {answer12}")
+print(f"세 번째 답변: {answer13}")
+print(f"네 번째 답변: {answer14}")
+
+####2
+
+from sklearn.preprocessing import normalize
+
+# 사용자의 선택 횟수 데이터 (예시, 테마 변수 제외)
+user_selection_counts = {
+    '가격': 3,
+    '위치': 2,
+    '평점': 0,
+    '리뷰': 0
+}
+
+# 테마 변수에 고정 가중치 할당 (0.2)
+variable_weights = {
+    '테마': 0.2
+}
+
+# 나머지 변수에 대한 응답 횟수 추출
+responses = list(user_selection_counts.values())
+
+# 응답 횟수를 정규화하여 가중치를 계산
+normalized_weights = normalize([responses], norm='l1')[0]
+
+# 가중치 총합 계산
+total_weight = sum(normalized_weights)
+
+# 나머지 변수에 가중치 할당
+variables = list(user_selection_counts.keys())
+for i, variable in enumerate(variables):
+    variable_weights[variable] = normalized_weights[i] * (1 - variable_weights['테마'])
+
+# 결과 출력
+print("변수별 가중치:")
+for variable, weight in variable_weights.items():
+    print(f"{variable}: {weight:.2f}")
+
+# 가중치 총합 확인
+print(f"가중치 총합: {sum(variable_weights.values()):.2f}")
+
+#####3
+def get_normalized_input(prompt):
+    while True:
+        try:
+            user_input = int(input(prompt))
+            if user_input % 5 == 0:
+                return user_input
+            else:
+                print("입력값은 5의 배수여야 합니다.")
+        except ValueError:
+            print("올바른 숫자를 입력하세요.")
+
+def get_priority(prompt):
+    while True:
+        try:
+            user_input = int(input(prompt))
+            if 1 <= user_input <= 4:
+                return user_input
+            else:
+                print("우선순위는 1에서 4 사이의 정수 값이어야 합니다.")
+        except ValueError:
+            print("올바른 숫자를 입력하세요.")
+
+# 사용자로부터 가격, 리뷰, 별점, 거리에 대한 점수 입력 받기
+price = get_normalized_input("가격에 대한 점수를 입력하세요 (5의 배수): ")
+review = get_normalized_input("리뷰에 대한 점수를 입력하세요 (5의 배수): ")
+rating = get_normalized_input("별점에 대한 점수를 입력하세요 (5의 배수): ")
+distance = get_normalized_input("거리에 대한 점수를 입력하세요 (5의 배수): ")
+
+# 총합 계산
+total = price + review + rating + distance
+
+# 비율 계산 및 값 조정
+if total > 0:
+    ratio = 1 / total
+    price_weight = price * ratio
+    review_weight = review * ratio
+    rating_weight = rating * ratio
+    distance_weight = distance * ratio
+
+# 4가지 답변 값이 같을 경우 사용자 우선순위에 따라 조정
+if len(set([price_weight, review_weight, rating_weight, distance_weight])) == 1:
+    priority1 = get_priority("가격 우선순위를 입력하세요 (1에서 4 사이의 값): ")
+    priority2 = get_priority("리뷰 우선순위를 입력하세요 (1에서 4 사이의 값): ")
+    priority3 = get_priority("별점 우선순위를 입력하세요 (1에서 4 사이의 값): ")
+    priority4 = get_priority("거리 우선순위를 입력하세요 (1에서 4 사이의 값): ")
+
+    price_weight += 0.55 * priority1
+    review_weight += 0.3 * priority2
+    rating_weight += 0.15 * priority3
+    distance_weight += 0.0 * priority4
+
+# 조정된 값들의 총합이 1이 되도록 조정
+total2 = price_weight + review_weight + rating_weight + distance_weight
+if total2 != 1:
+    adjustment_factor = 1 / total2
+    price_weight *= adjustment_factor
+    review_weight *= adjustment_factor
+    rating_weight *= adjustment_factor
+    distance_weight *= adjustment_factor
+
+# 결과 출력
+print(f"가격 가중치: {price_weight:.2f}")
+print(f"리뷰 가중치: {review_weight:.2f}")
+print(f"별점 가중치: {rating_weight:.2f}")
+print(f"거리 가중치: {distance_weight:.2f}")
+#####4.최종
+
+def get_normalized_input(prompt):
+    while True:
+        try:
+            user_input = int(input(prompt))
+            if 0 <= user_input <= 100 and user_input % 5 == 0:
+                return user_input
+            else:
+                print("입력값은 5의 배수여야 합니다.")
+        except ValueError:
+            print("올바른 숫자를 입력하세요.")
+
+def get_priority(prompt):
+    while True:
+        try:
+            user_input = int(input(prompt))
+            if 1 <= user_input <= 4:
+                return user_input
+            else:
+                print("우선순위는 1에서 4 사이의 정수 값이어야 합니다.")
+        except ValueError:
+            print("올바른 숫자를 입력하세요.")
+
+# 사용자로부터 가격, 리뷰, 별점, 거리에 대한 점수 입력 받기
+price = get_normalized_input("가격에 대한 점수를 입력하세요 (5의 배수): ")
+review = get_normalized_input("리뷰에 대한 점수를 입력하세요 (5의 배수): ")
+rating = get_normalized_input("별점에 대한 점수를 입력하세요 (5의 배수): ")
+distance = get_normalized_input("거리에 대한 점수를 입력하세요 (5의 배수): ")
+
+# 총합 계산
+total = price + review + rating + distance
+
+# 비율 계산 및 값 조정
+if total > 0:
+    ratio = 1 / total
+    price_weight = price * ratio
+    review_weight = review * ratio
+    rating_weight = rating * ratio
+    distance_weight = distance * ratio
+
+
+# 사용자가 입력한 우선순위에 따라 가중치 조정
+priority1 = get_priority("가격 우선순위를 입력하세요 (1에서 4 사이의 값): ")
+priority2 = get_priority("리뷰 우선순위를 입력하세요 (1에서 4 사이의 값): ")
+priority3 = get_priority("별점 우선순위를 입력하세요 (1에서 4 사이의 값): ")
+priority4 = get_priority("거리 우선순위를 입력하세요 (1에서 4 사이의 값): ")
+
+# 우선순위에 따라 가중치 부여
+# 모든 가중치가 같은지 확인
+if price_weight == review_weight == rating_weight == distance_weight:
+    # 우선순위에 따라 가중치 할당
+    if priority1 == 1:
+        price_weight = 0.4
+    elif priority1 == 2:
+        price_weight = 0.3
+    elif priority1 == 3:
+        price_weight = 0.2
+    elif priority1 == 4:
+        price_weight = 0.1
+
+    if priority2 == 1:
+        review_weight = 0.4
+    elif priority2 == 2:
+        review_weight = 0.3
+    elif priority2 == 3:
+        review_weight = 0.2
+    elif priority2 == 4:
+        review_weight = 0.1
+
+    if priority3 == 1:
+        rating_weight = 0.4
+    elif priority3 == 2:
+        rating_weight = 0.3
+    elif priority3 == 3:
+        rating_weight = 0.2
+    elif priority3 == 4:
+        rating_weight = 0.1
+
+    if priority4 == 1:
+        distance_weight = 0.4
+    elif priority4 == 2:
+        distance_weight = 0.3
+    elif priority4 == 3:
+        distance_weight = 0.2
+    elif priority4 == 4:
+        distance_weight = 0.1
+
+
+# 조정된 값들의 총합이 1이 되도록 조정
+total2 = price_weight + review_weight + rating_weight + distance_weight
+if total2 != 1:
+    adjustment_factor = 1 / total2
+    price_weight *= adjustment_factor
+    review_weight *= adjustment_factor
+    rating_weight *= adjustment_factor
+    distance_weight *= adjustment_factor
+
+# 결과 출력1
+print(f"가격 가중치: {price_weight:.2f}")
+print(f"리뷰 가중치: {review_weight:.2f}")
+print(f"별점 가중치: {rating_weight:.2f}")
+print(f"거리 가중치: {distance_weight:.2f}")
 
