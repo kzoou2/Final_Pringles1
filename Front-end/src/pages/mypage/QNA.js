@@ -19,7 +19,6 @@ function QNA() {
 
     return (
         <div>
-            질의응답 작성 페이지
             <table className="table text-center my-3">
                 <thead className="table-dark">
                     <tr>
