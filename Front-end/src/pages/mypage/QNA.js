@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 function QNA() {
     const [questionList, setQuestionList] = useState([]);
@@ -19,6 +20,7 @@ function QNA() {
 
     return (
         <div>
+            <Link className="btn btn-primary" to="/mypage/qna/question-create">질문등록</Link>
             <table className="table text-center my-3">
                 <thead className="table-dark">
                     <tr>
@@ -33,9 +35,13 @@ function QNA() {
                             <tr key={index}>
                                 <td>{index+1}</td>
                                 <td>
-                                    <Link to={`/mypage/qna/${question.id}`}>{question.subject}</Link>
+                                    {/* 답변 개수 표시 */}
+                                    <Link className="text-decoration-none" to={`/mypage/qna/${question.id}`}>
+                                        {question.subject}
+                                        <sup className="text-danger ms-2">[{question.answerlist.length}]</sup>
+                                    </Link>
                                 </td>
-                                <td>{question.createDate}</td>
+                                <td>{moment(question.createDate).format("YYYY-MM-DD HH:mm:ss")}</td>
                             </tr>
                         )
                     })}
