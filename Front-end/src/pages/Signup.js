@@ -188,6 +188,11 @@ function Signup() {
                     <label htmlFor="email" className="form-label">이메일</label>
                     <input onChange={onChange} value={email} type="email" className="form-control" id="email" name="email"></input>
                 </div>
+				<div className="mb-3">
+                    <label htmlFor="address" className="form-label">주소</label>
+                    <input onChange={onChange} value={address} type="address" className="form-control" id="adderess" name="adderess"></input>
+                </div>
+
                 <button type="sumbit" className="btn btn-primary">회원가입</button>
             </form>
         </div>
