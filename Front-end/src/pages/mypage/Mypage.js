@@ -25,6 +25,22 @@ function MyPage() {
         navigate('/mypage/qna');
     }
 
+    // style
+    const StyleButton = {
+        margin: 'auto',
+        borderInlineColor: 'black',
+        borderInlineWidth: '2.5px'
+    }
+
+    const StyleDiv = {
+        height: '200px',
+        border: '1px solid lightgray',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
+
     return (
         <div className="container my-3">
             <div className="container">
@@ -39,19 +55,19 @@ function MyPage() {
             <div className="container" style={{width:'45%', float:'left'}}>
                 <div>
                     <h4><b>나의 일정</b></h4>
-                    <div className="text-center" style={{height:'200px', border: '1px solid lightgray', display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
-                        <button onClick={planOnClick} className='btn btn-outline btn-sm' style={{margin:'auto', borderInlineColor:'black', borderInlineWidth:'2.5px'}}>전체 일정 목록</button>
-                        <button onClick={recordOnClick} className='btn btn-outline btn-sm' style={{margin:'auto', borderInlineColor:'black', borderInlineWidth:'2.5px'}}>여행 기록</button>
+                    <div className="text-center" style={StyleDiv}>
+                        <button onClick={planOnClick} className='btn btn-outline btn-sm' style={StyleButton}>전체 일정 목록</button>
+                        <button onClick={recordOnClick} className='btn btn-outline btn-sm' style={StyleButton}>여행 기록</button>
                     </div>
                 </div>
             </div>
             <div className="container" style={{width:'45%', float:'right'}}>
                 <div>
                     <h4><b>나의 활동</b></h4>
-                    <div className="text-center" style={{height:'200px', border: '1px solid lightgray', display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
-                        <button onClick={bookmarkOnClick} className='btn btn-outline btn-sm' style={{margin:'auto', borderInlineColor:'black', borderInlineWidth:'2.5px'}}>찜</button>
-                        <button onClick={reviewOnClick} className='btn btn-outline btn-sm' style={{margin:'auto', borderInlineColor:'black', borderInlineWidth:'2.5px'}}>리뷰</button>
-                        <button onClick={qnaOnClick} className='btn btn-outline btn-sm' style={{margin:'auto', borderInlineColor:'black', borderInlineWidth:'2.5px'}}>Q&A</button>
+                    <div className="text-center" style={StyleDiv}>
+                        <button onClick={bookmarkOnClick} className='btn btn-outline btn-sm' style={StyleButton}>찜</button>
+                        <button onClick={reviewOnClick} className='btn btn-outline btn-sm' style={StyleButton}>리뷰</button>
+                        <button onClick={qnaOnClick} className='btn btn-outline btn-sm' style={StyleButton}>Q&A</button>
                     </div>
                 </div>
             </div>
