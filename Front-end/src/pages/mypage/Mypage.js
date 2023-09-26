@@ -48,7 +48,7 @@ function MyPage() {
                 <div className="text-center">
                     <p>중앙에 유저 프로필</p>
                     <p>'사용자명'님</p>
-                    <Link to="/MyPage/modify">회원 정보 수정</Link>
+                    <Link to="/myPage/modify">회원 정보 수정</Link>
                 </div>
                 <hr></hr>
             </div>
