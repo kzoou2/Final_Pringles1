@@ -1,8 +1,9 @@
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useUser } from "../UserContext";
 
 function MyPage() {
-
+    
+    const {userName} = useUser();
     const navigate = useNavigate();
 
     const planOnClick = () => {
@@ -47,8 +48,8 @@ function MyPage() {
                 <h3><b>마이페이지</b></h3>
                 <div className="text-center">
                     <p>중앙에 유저 프로필</p>
-                    <p>'사용자명'님</p>
-                    <Link to="/mypage/modify">회원 정보 수정</Link>
+                    <p>{userName}님</p> {/* 사용자 이름을 상태 변수에서 가져와서 표시 */}
+                    <Link to="/myPage/modify">회원 정보 수정</Link>
                 </div>
                 <hr></hr>
             </div>
