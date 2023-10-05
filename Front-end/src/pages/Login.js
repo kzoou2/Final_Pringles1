@@ -12,9 +12,9 @@ function Login({isLogin, setIsLogin}) {
     const navigate = useNavigate();
 
     function onChange(event) {
-        if (event.target.name == "userid") {
+        if (event.target.name === "userid") {
             setUserid(event.target.value)
-        } else if (event.target.name == "password") {
+        } else if (event.target.name === "password") {
             setPassword(event.target.value)
         }
     }
@@ -41,7 +41,7 @@ function Login({isLogin, setIsLogin}) {
                     password: password
                 })
                 if (result.status === 200) {
-                    console.log(result.data);
+                    console.log(result);
                     setIsLogin(true);   // true로 설정하면 navbar의 로그인 버튼이 로그아웃으로 바뀜
                     window.localStorage.setItem("userid", result.data);
                     navigate("/")
@@ -60,8 +60,8 @@ function Login({isLogin, setIsLogin}) {
     }
 
     return (
-        <div className="container my-3">
-            <form onSubmit={onSubmit}>
+        <div className="container my-3" style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
+            <form onSubmit={onSubmit} style={{width: '400px'}}>
                 {errorMessage.length > 0 &&
                     (<div className="alert alert-danger" role="alert">
                         {errorMessage.map((message, index) => (<div key={index}>{message}</div>))}
@@ -74,12 +74,11 @@ function Login({isLogin, setIsLogin}) {
                 <br/>
                 <div className="mb-2">
                     <label className="form-label" htmlFor="password"><b>비밀번호</b></label>
-                    <input onChange={onChange} type="password" className="form-control" id="password" name="password"></input>
+                    <input onChange={onChange} type="password" className="form-control" id="password" name="password" autoComplete="current-password"></input>
                 </div>
                 <br />
                 <button type="sumbit" className="btn btn-primary">로그인</button>
             </form>
-
             {/* <div className="my-3">
                 <a href={KAKAO_AUTH_URL} className="kakaobtn">
                     <img src={kakao}></img>
