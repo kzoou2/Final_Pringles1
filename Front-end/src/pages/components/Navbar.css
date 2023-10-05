@@ -1,0 +1,35 @@
+/* Navbar 컨테이너 스타일 */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 10px 20px;
+    color: #fff;
+  }
+  
+  /* 아이콘 스타일 */
+  .icon {
+    width: 30px; /* 아이콘 너비 설정 */
+    height: 30px; /* 아이콘 높이 설정 */
+    /* 다른 아이콘 스타일링을 원하는 대로 추가 */
+  }
+  
+  /* 네비게이션 링크 스타일 */
+  .navbar-right ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  .navbar-right li {
+    margin-right: 20px;
+  }
+  
+  .navbar-right a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+  }
+  
