@@ -1,6 +1,11 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useUser } from "./pages/UserContext";
 
 function Navbar({isLogin, setIsLogin}) {
+
+    const {userName} = useUser();
+    const [userid, setUserid] = useState("")
 
     console.log("isLogin : " + isLogin);
     const navigate = useNavigate();
@@ -8,7 +13,18 @@ function Navbar({isLogin, setIsLogin}) {
     function logout() {
         window.localStorage.removeItem("userid");
         setIsLogin(false);
-        navigate("/login")
+        navigate("/")
+    }
+
+    function plan() {
+        if(isLogin === true) {
+            navigate('/plan');
+            console.log("userid :" + userid);
+            console.log("username : "+ userName)
+        } else {
+            alert("로그인이 필요합니다.");
+            navigate('/login');
+        }
     }
 
     return (
@@ -31,11 +47,15 @@ function Navbar({isLogin, setIsLogin}) {
                                 <Link className="nav-link active" to="/login">로그인</Link>
                             )}
                         </li>
+                        {/* 로그인 상태일때만 마이페이지 메뉴 표시 */}
+                        {isLogin &&
                         <li className="nav-item">
                             <Link className="nav-link active" aria-current="page" to="/mypage">마이페이지</Link>
                         </li>
+                        }
                         <li className="nav-item">
-                            <Link className="nav-link active" aria-current="page" to="/plan">일정 만들기</Link>
+                            <button className="nav-link active" onClick={plan}>일정 만들기</button>
+                            {/* <Link className="nav-link active" aria-current="page" to="/plan">일정 만들기</Link> */}
                         </li>
                     </ul>
                 </div>
