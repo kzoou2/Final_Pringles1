@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import TouristSpot from '../components/TouristSpot';
-import Sidebar from '../components/Sidebar';
+import TouristSpot from './MyActivityPage/TouristSpot';
+import Sidebar from '../../Sidebar';
 
 const PageContainer = styled.div`
   display: flex;
@@ -26,8 +26,6 @@ const Text = styled.h2`
 `;
 
 const Bookmark = () => {
-//   // 북마크된 관광지 데이터 (예시)
-//   const [bookmarkedTouristSpots, setBookmarkedTouristSpots] = useState([
     // 북마크된 관광지 데이터 (예시)
   const bookmarkedTouristSpots = [
     {
@@ -105,7 +103,7 @@ const Bookmark = () => {
       <Sidebar /> {/* 사이드바를 여기에 추가 */}
       <Container>
         <TextContainer>
-          <Text>나의 찜한 장소</Text>
+          <Text>나의 찜한 장소🏷️</Text>
         </TextContainer>
         {bookmarkedTouristSpots.map((spot) => (
             <TouristSpot

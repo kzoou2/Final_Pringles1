@@ -53,6 +53,9 @@ function Navbar({isLogin, setIsLogin}) {
                             <Link className="nav-link active" aria-current="page" to="/mypage">마이페이지</Link>
                         </li>
                         }
+                        <li class="nav-item">
+                            <Link className="nav-link active" aria-current="page" to="/mypage">마이페이지</Link>
+                        </li>
                         <li className="nav-item">
                             <button className="nav-link active" onClick={plan}>일정 만들기</button>
                             {/* <Link className="nav-link active" aria-current="page" to="/plan">일정 만들기</Link> */}
