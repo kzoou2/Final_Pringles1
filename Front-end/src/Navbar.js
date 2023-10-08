@@ -53,6 +53,7 @@ function Navbar({isLogin, setIsLogin}) {
                             <Link className="nav-link active" aria-current="page" to="/mypage">마이페이지</Link>
                         </li>
                         }
+                        {/* 로그인 상태 아닐시 마이페이지 메뉴 표시 -연습 */}
                         <li class="nav-item">
                             <Link className="nav-link active" aria-current="page" to="/mypage">마이페이지</Link>
                         </li>

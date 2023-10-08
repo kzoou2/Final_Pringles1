@@ -39,20 +39,18 @@ function Sidebar() {
     ];
     
     return (
-        <Side>
-            <div className="sidebar">
-                {menus.map((menu, index) => {
-                    return (
-                        <Link to={menu.path} key={index}>
-                            <SidebarItem 
-                                menu={menu}
-                                isActive={pathName === menu.path ? true : false}   // 현재 URL pathname과 객체에 담긴 path값 일치 여부 확인
-                            />
-                        </Link>
-                    );
-                })}
-            </div>
-        </Side>
+        <div className="sidebar">
+            {menus.map((menu, index) => {
+                return (
+                    <Link to={menu.path} key={index}>
+                        <SidebarItem 
+                            menu={menu}
+                            isActive={pathName === menu.path ? true : false}   // 현재 URL pathname과 객체에 담긴 path값 일치 여부 확인
+                        />
+                    </Link>
+                );
+            })}
+        </div>
     )
     //     <Side>
     //         <Profile src={profile}></Profile>
