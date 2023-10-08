@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import TouristSpot from '../components/TouristSpot';
-import Sidebar from '../components/Sidebar';
+import TouristSpot from './TouristSpot';
+import Sidebar from './Sidebar';
 
 const PageContainer = styled.div`
   display: flex;
