@@ -6,6 +6,7 @@ import SidebarItem from "./SidebarItem";
 const Side = styled.div`
     display: flex;
     border-right: 1px solid #e0e0e0;
+    background-color: #f0f0f0;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -30,11 +31,11 @@ function Sidebar() {
     const pathName = useLocation().pathname;
 
     const menus = [
-        {name: "전체 여행 목록", path: "/MyPage"},
-        {name: "여행 기록", path: "/Record"},
-        {name: "찜", path: "/bookmark"},
-        {name: "리뷰", path: "/review"},
-        {name: "Q&A", path: "/q&a"},
+        {name: "전체 여행 목록", path: "/mypage/planlist"},
+        {name: "여행 기록", path: "/mypage/record"},
+        {name: "찜", path: "/mypage/bookmark"},
+        {name: "리뷰", path: "/mypage/review"},
+        {name: "Q&A", path: "/mypage/qna"},
     ];
     
     return (
